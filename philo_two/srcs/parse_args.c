@@ -6,7 +6,7 @@
 /*   By: clbrunet <clbrunet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 09:43:00 by clbrunet          #+#    #+#             */
-/*   Updated: 2021/05/04 07:54:07 by clbrunet         ###   ########.fr       */
+/*   Updated: 2021/05/05 21:48:19 by clbrunet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,6 @@ char			parse_args(int argc, char *argv[], t_globals *globs)
 		|| globs->time_to_eat == 0 || globs->time_to_sleep == 0
 		|| (argc == 6 && globs->nb_time_philosophers_must_eat == 0))
 		return (1);
+	globs->nb_done = 0;
 	return (0);
 }

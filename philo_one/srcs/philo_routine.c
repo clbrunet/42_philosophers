@@ -6,7 +6,7 @@
 /*   By: clbrunet <clbrunet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 08:25:19 by clbrunet          #+#    #+#             */
-/*   Updated: 2021/05/06 18:44:33 by clbrunet         ###   ########.fr       */
+/*   Updated: 2021/05/06 18:57:06 by clbrunet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void		take_forks(t_thread_arg *arg, char const *is_finished_p)
 {
-	if (pthread_mutex_lock(arg->right_fork_mutex) || usleep(100)
+	if (pthread_mutex_lock(arg->right_fork_mutex)
 			|| pthread_mutex_lock(&arg->left_fork_mutex))
 		printf("Locking fork mutex error\n");
 	if (*is_finished_p)

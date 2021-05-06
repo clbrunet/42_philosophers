@@ -6,7 +6,7 @@
 /*   By: clbrunet <clbrunet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 09:43:02 by clbrunet          #+#    #+#             */
-/*   Updated: 2021/05/04 08:24:02 by clbrunet         ###   ########.fr       */
+/*   Updated: 2021/05/06 18:44:44 by clbrunet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ static void		simulation(t_globals *globs, t_thread *threads)
 		if (pthread_create(&threads[i].id, NULL, &philo_routine,
 					&threads[i].arg) != 0)
 			return ;
+		usleep(100);
 		i++;
 	}
 	while (simulation_check_end(globs, threads) == 0)

@@ -6,7 +6,7 @@
 /*   By: clbrunet <clbrunet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 08:25:19 by clbrunet          #+#    #+#             */
-/*   Updated: 2021/05/06 14:30:45 by clbrunet         ###   ########.fr       */
+/*   Updated: 2021/05/06 18:28:57 by clbrunet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void		take_forks(t_thread_arg *arg)
 			"has taken a fork");
 }
 
-static void		eat(t_thread_arg *arg)
+static void		eat(t_thread_arg *arg, unsigned int *i)
 {
 	take_forks(arg);
 	sem_wait(arg->death_sem);
@@ -36,6 +36,14 @@ static void		eat(t_thread_arg *arg)
 		printf("%07lu %i %s\n", get_time_ms() - arg->globs->epoch, arg->nb,
 				"is eating");
 		usleep(arg->globs->time_to_eat * 1000);
+	}
+	(*i)++;
+	if (arg->globs->should_stop
+			&& *i == arg->globs->nb_time_philosophers_must_eat)
+	{
+		sem_wait(arg->globs->nb_done_sem);
+		arg->globs->nb_done++;
+		sem_post(arg->globs->nb_done_sem);
 	}
 	sem_post(arg->globs->forks_sem);
 	sem_post(arg->globs->forks_sem);
@@ -61,15 +69,7 @@ void			*philo_routine(void *void_arg)
 	{
 		printf("%07lu %i %s\n", get_time_ms() - arg->globs->epoch, arg->nb,
 				"is thinking");
-		eat(arg);
-		i++;
-		if (arg->globs->should_stop
-				&& i == arg->globs->nb_time_philosophers_must_eat)
-		{
-			sem_wait(arg->globs->nb_done_sem);
-			arg->globs->nb_done++;
-			sem_post(arg->globs->nb_done_sem);
-		}
+		eat(arg, &i);
 		sleep_routine(arg);
 	}
 	return (NULL);

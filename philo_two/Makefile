@@ -9,7 +9,7 @@ SRCS = srcs/ft.c			\
 OBJS = $(SRCS:.c=.o)
 
 CC = clang
-CFLAGS = -Wall -Wextra -Werror -I./includes/ -g3
+CFLAGS = -Wall -Wextra -Werror -I./includes/
 
 .c.o:
 	$(CC) $(CFLAGS) -o $@ -c $<

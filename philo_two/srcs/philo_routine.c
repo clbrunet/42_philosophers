@@ -6,7 +6,7 @@
 /*   By: clbrunet <clbrunet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 08:25:19 by clbrunet          #+#    #+#             */
-/*   Updated: 2021/05/06 18:28:57 by clbrunet         ###   ########.fr       */
+/*   Updated: 2021/05/06 19:18:01 by clbrunet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void		eat(t_thread_arg *arg, unsigned int *i)
 	{
 		printf("%07lu %i %s\n", get_time_ms() - arg->globs->epoch, arg->nb,
 				"is eating");
-		usleep(arg->globs->time_to_eat * 1000);
+		ft_usleep(arg->globs->time_to_eat);
 	}
 	(*i)++;
 	if (arg->globs->should_stop
@@ -55,7 +55,7 @@ static void		sleep_routine(t_thread_arg *arg)
 		return ;
 	printf("%07lu %i %s\n", get_time_ms() - arg->globs->epoch, arg->nb,
 			"is sleeping");
-	usleep(arg->globs->time_to_sleep * 1000);
+	ft_usleep(arg->globs->time_to_sleep);
 }
 
 void			*philo_routine(void *void_arg)

@@ -6,7 +6,7 @@
 /*   By: clbrunet <clbrunet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 09:44:26 by clbrunet          #+#    #+#             */
-/*   Updated: 2021/05/04 08:25:33 by clbrunet         ###   ########.fr       */
+/*   Updated: 2021/05/06 19:13:26 by clbrunet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ typedef struct	s_thread
 }				t_thread;
 
 char			parse_args(int argc, char *argv[], t_globals *globs);
+
 unsigned long	get_time_ms(void);
+void			ft_usleep(unsigned long duration);
+
 t_thread		*initialize_simulation(t_globals const *globs,
 		unsigned int *nb_done, pthread_mutex_t *nb_done_mutex);
 void			destroy_simulation(t_globals *globs, t_thread *threads);

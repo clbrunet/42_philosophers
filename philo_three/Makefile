@@ -2,6 +2,7 @@ NAME = philo_three
 
 SRCS = srcs/ft.c			\
 	   srcs/parse_args.c	\
+	   srcs/time.c			\
 	   srcs/utils.c			\
 	   srcs/philo_routine.c	\
 	   srcs/philo_process2.c\

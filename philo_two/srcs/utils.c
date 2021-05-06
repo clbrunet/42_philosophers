@@ -12,15 +12,6 @@
 
 #include "philo_two.h"
 
-unsigned long	get_time_ms(void)
-{
-	struct timeval	timeval;
-
-	if (gettimeofday(&timeval, NULL) != 0)
-		return (-1);
-	return (timeval.tv_sec * 1000 + timeval.tv_usec / 1000);
-}
-
 static char		initialize_threads_sems(t_globals *globs, t_thread *threads)
 {
 	sem_unlink(FORKS_SEM_NAME);

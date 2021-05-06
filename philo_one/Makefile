@@ -1,6 +1,7 @@
 NAME = philo_one
 
 SRCS = srcs/parse_args.c	\
+	   srcs/time.c			\
 	   srcs/utils.c			\
 	   srcs/philo_routine.c	\
 	   srcs/main.c

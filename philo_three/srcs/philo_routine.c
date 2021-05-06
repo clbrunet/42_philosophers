@@ -6,7 +6,7 @@
 /*   By: clbrunet <clbrunet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 19:24:58 by clbrunet          #+#    #+#             */
-/*   Updated: 2021/05/06 18:29:55 by clbrunet         ###   ########.fr       */
+/*   Updated: 2021/05/06 19:16:49 by clbrunet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	eat(t_process_arg *arg, unsigned int *i)
 			"is eating");
 	sem_post(arg->globs->output_sem);
 	if (!arg->is_finished)
-		usleep(arg->globs->time_to_eat * 1000);
+		ft_usleep(arg->globs->time_to_eat);
 	(*i)++;
 	if (arg->globs->should_stop
 			&& *i == arg->globs->nb_time_philosophers_must_eat)
@@ -59,7 +59,7 @@ static void	sleep_routine(t_process_arg *arg)
 			"is sleeping");
 	sem_post(arg->globs->output_sem);
 	if (!arg->is_finished)
-		usleep(arg->globs->time_to_sleep * 1000);
+		ft_usleep(arg->globs->time_to_sleep);
 }
 
 int			philo_routine(t_process_arg *arg)

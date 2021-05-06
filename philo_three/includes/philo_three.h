@@ -6,7 +6,7 @@
 /*   By: clbrunet <clbrunet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 09:44:26 by clbrunet          #+#    #+#             */
-/*   Updated: 2021/05/06 14:41:08 by clbrunet         ###   ########.fr       */
+/*   Updated: 2021/05/06 19:16:18 by clbrunet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,10 @@ char			*ft_itoa(int n);
 char			*ft_strjoin(char const *s1, char const *s2);
 
 char			parse_args(int argc, char *argv[], t_globals *globs);
+
 unsigned long	get_time_ms(void);
+void			ft_usleep(unsigned long duration);
+
 char			initialize_simulation(t_globals *globs,
 		t_process_arg *process_arg);
 void			destroy_simulation(t_globals *globs);

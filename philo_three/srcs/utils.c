@@ -6,20 +6,11 @@
 /*   By: clbrunet <clbrunet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 18:55:20 by clbrunet          #+#    #+#             */
-/*   Updated: 2021/05/06 14:43:49 by clbrunet         ###   ########.fr       */
+/*   Updated: 2021/05/06 19:16:33 by clbrunet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_three.h"
-
-unsigned long	get_time_ms(void)
-{
-	struct timeval	timeval;
-
-	if (gettimeofday(&timeval, NULL) != 0)
-		return (-1);
-	return (timeval.tv_sec * 1000 + timeval.tv_usec / 1000);
-}
 
 static char		initialize_sems2(t_globals *globs)
 {

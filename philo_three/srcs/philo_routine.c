@@ -6,7 +6,7 @@
 /*   By: clbrunet <clbrunet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 19:24:58 by clbrunet          #+#    #+#             */
-/*   Updated: 2021/05/05 20:08:35 by clbrunet         ###   ########.fr       */
+/*   Updated: 2021/05/06 14:29:29 by clbrunet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 static void	take_forks(t_process_arg *arg)
 {
-	if (!arg->is_finished)
-		sem_wait(arg->globs->forks_sem);
-	if (!arg->is_finished)
-		printf("%07lu %i %s\n", get_time_ms() - arg->globs->epoch, arg->nb,
+	if (arg->is_finished)
+		return ;
+	if (sem_wait(arg->globs->forks_sem) || sem_wait(arg->globs->forks_sem))
+		printf("Wait for fork semaphore error\n");
+	if (arg->is_finished)
+		return ;
+	printf("%07lu %i %s\n", get_time_ms() - arg->globs->epoch, arg->nb,
 			"has taken a fork");
-	if (!arg->is_finished)
-		sem_wait(arg->globs->forks_sem);
-	if (!arg->is_finished)
-		printf("%07lu %i %s\n", get_time_ms() - arg->globs->epoch, arg->nb,
+	printf("%07lu %i %s\n", get_time_ms() - arg->globs->epoch, arg->nb,
 			"has taken a fork");
 }
 

@@ -6,7 +6,7 @@
 /*   By: clbrunet <clbrunet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 08:25:19 by clbrunet          #+#    #+#             */
-/*   Updated: 2021/05/04 08:25:53 by clbrunet         ###   ########.fr       */
+/*   Updated: 2021/05/06 13:37:34 by clbrunet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,21 @@
 static void		take_forks(t_thread_arg *arg, char const *is_finished_p)
 {
 	if (arg->nb % 2 == 0)
-		pthread_mutex_lock(arg->right_fork_mutex);
-	else
-		pthread_mutex_lock(&arg->left_fork_mutex);
-	if (!*is_finished_p)
 	{
-		printf("%07lu %i %s\n", get_time_ms() - arg->globs->epoch, arg->nb,
-				"has taken a fork");
+		if (pthread_mutex_lock(arg->right_fork_mutex)
+				|| pthread_mutex_lock(&arg->left_fork_mutex))
+			printf("Locking fork mutex error\n");
 	}
-	if (arg->nb % 2 == 0)
-		pthread_mutex_lock(&arg->left_fork_mutex);
 	else
-		pthread_mutex_lock(arg->right_fork_mutex);
+	{
+		if (pthread_mutex_lock(&arg->left_fork_mutex)
+				|| pthread_mutex_lock(arg->right_fork_mutex))
+			printf("Locking fork mutex error\n");
+	}
 	if (*is_finished_p)
 		return ;
+	printf("%07lu %i %s\n", get_time_ms() - arg->globs->epoch, arg->nb,
+			"has taken a fork");
 	printf("%07lu %i %s\n", get_time_ms() - arg->globs->epoch, arg->nb,
 			"has taken a fork");
 }

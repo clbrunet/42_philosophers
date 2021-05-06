@@ -6,7 +6,7 @@
 /*   By: clbrunet <clbrunet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 08:25:19 by clbrunet          #+#    #+#             */
-/*   Updated: 2021/05/06 19:13:53 by clbrunet         ###   ########.fr       */
+/*   Updated: 2021/05/06 19:26:39 by clbrunet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ static void		take_forks(t_thread_arg *arg, char const *is_finished_p)
 			"has taken a fork");
 }
 
-static void		eat(t_thread_arg *arg, char const *is_finished_p, unsigned int *i)
+static void		eat(t_thread_arg *arg, char const *is_finished_p,
+		unsigned int *i)
 {
 	pthread_mutex_lock(&arg->death_mutex);
 	arg->death_time = get_time_ms() - arg->globs->epoch

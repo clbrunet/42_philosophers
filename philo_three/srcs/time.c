@@ -6,7 +6,7 @@
 /*   By: clbrunet <clbrunet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 19:12:49 by clbrunet          #+#    #+#             */
-/*   Updated: 2021/05/06 19:16:06 by clbrunet         ###   ########.fr       */
+/*   Updated: 2021/05/06 19:26:21 by clbrunet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ unsigned long	get_time_ms(void)
 		return (-1);
 	return (timeval.tv_sec * 1000 + timeval.tv_usec / 1000);
 }
-
 
 void			ft_usleep(unsigned long duration)
 {

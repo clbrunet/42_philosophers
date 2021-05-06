@@ -6,7 +6,7 @@
 /*   By: clbrunet <clbrunet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 09:44:26 by clbrunet          #+#    #+#             */
-/*   Updated: 2021/05/05 21:14:59 by clbrunet         ###   ########.fr       */
+/*   Updated: 2021/05/06 14:41:08 by clbrunet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # define FORKS_SEM_NAME "/forks_sem"
 # define NB_DN_SEM_NAME "/nb_done_sem"
 # define IS_FINISHED_SEM_NAME "/is_finished_sem"
+# define OUTPUT_SEM_NAME "/output_sem_"
 # define DEATH_SEM_NAME_START "/death_sem_"
 
 typedef struct	s_globals
@@ -41,6 +42,7 @@ typedef struct	s_globals
 	sem_t			*is_finished_sem;
 	sem_t			*nb_done_sem;
 	sem_t			*forks_sem;
+	sem_t			*output_sem;
 }				t_globals;
 
 typedef struct	s_process_arg

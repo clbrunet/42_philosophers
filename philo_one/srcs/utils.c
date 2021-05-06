@@ -6,7 +6,7 @@
 /*   By: clbrunet <clbrunet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 18:55:20 by clbrunet          #+#    #+#             */
-/*   Updated: 2021/05/04 08:30:53 by clbrunet         ###   ########.fr       */
+/*   Updated: 2021/05/06 14:39:06 by clbrunet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ static char		initialize_threads_mutexes(t_globals const *globs,
 		ret = pthread_mutex_init(&threads[i].arg.death_mutex, NULL);
 		if (ret || pthread_mutex_init(&threads[i].arg.left_fork_mutex, NULL))
 		{
+			pthread_mutex_destroy(nb_done_mutex);
 			if (ret == 0)
 				pthread_mutex_destroy(&threads[i].arg.death_mutex);
-			i--;
-			while (i != (unsigned)-1)
+			while (i > 0)
 			{
+				i--;
 				pthread_mutex_destroy(&threads[i].arg.left_fork_mutex);
 				pthread_mutex_destroy(&threads[i].arg.death_mutex);
-				i--;
 			}
 			return (1);
 		}

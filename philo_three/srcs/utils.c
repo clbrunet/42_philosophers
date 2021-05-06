@@ -6,7 +6,7 @@
 /*   By: clbrunet <clbrunet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 18:55:20 by clbrunet          #+#    #+#             */
-/*   Updated: 2021/05/05 18:00:46 by clbrunet         ###   ########.fr       */
+/*   Updated: 2021/05/06 14:43:49 by clbrunet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,24 @@ unsigned long	get_time_ms(void)
 	if (gettimeofday(&timeval, NULL) != 0)
 		return (-1);
 	return (timeval.tv_sec * 1000 + timeval.tv_usec / 1000);
+}
+
+static char		initialize_sems2(t_globals *globs)
+{
+	sem_unlink(OUTPUT_SEM_NAME);
+	globs->output_sem = sem_open(OUTPUT_SEM_NAME, O_CREAT | O_EXCL,
+			S_IRWXU, 1);
+	if (globs->output_sem == SEM_FAILED)
+	{
+		sem_close(globs->forks_sem);
+		sem_unlink(FORKS_SEM_NAME);
+		sem_close(globs->nb_done_sem);
+		sem_unlink(NB_DN_SEM_NAME);
+		sem_close(globs->is_finished_sem);
+		sem_unlink(IS_FINISHED_SEM_NAME);
+		return (1);
+	}
+	return (0);
 }
 
 static char		initialize_sems(t_globals *globs)
@@ -47,7 +65,7 @@ static char		initialize_sems(t_globals *globs)
 		sem_unlink(NB_DN_SEM_NAME);
 		return (1);
 	}
-	return (0);
+	return (initialize_sems2(globs));
 }
 
 char			initialize_simulation(t_globals *globs,
@@ -69,4 +87,6 @@ void			destroy_simulation(t_globals *globs)
 	sem_unlink(NB_DN_SEM_NAME);
 	sem_close(globs->is_finished_sem);
 	sem_unlink(IS_FINISHED_SEM_NAME);
+	sem_close(globs->output_sem);
+	sem_unlink(OUTPUT_SEM_NAME);
 }

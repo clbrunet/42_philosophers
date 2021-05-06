@@ -6,7 +6,7 @@
 /*   By: clbrunet <clbrunet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 21:14:16 by clbrunet          #+#    #+#             */
-/*   Updated: 2021/05/05 21:15:33 by clbrunet         ###   ########.fr       */
+/*   Updated: 2021/05/06 14:50:37 by clbrunet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static int	init_death_sem_error(t_globals *globs)
 	sem_close(globs->nb_done_sem);
 	sem_post(globs->is_finished_sem);
 	sem_close(globs->is_finished_sem);
+	sem_close(globs->output_sem);
 	return (1);
 }
 

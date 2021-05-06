@@ -6,7 +6,7 @@
 /*   By: clbrunet <clbrunet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 08:25:19 by clbrunet          #+#    #+#             */
-/*   Updated: 2021/05/06 14:28:32 by clbrunet         ###   ########.fr       */
+/*   Updated: 2021/05/06 15:01:18 by clbrunet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,15 @@ static void	*check_death_routine(void *void_arg)
 		sem_wait(arg->death_sem);
 		if (arg->death_time <= get_time_ms() - arg->globs->epoch)
 		{
+			sem_wait(arg->globs->output_sem);
 			if (!arg->is_finished)
 				printf("%07lu %i %s\n", get_time_ms() - arg->globs->epoch,
 					arg->nb, "died");
 			arg->is_finished = 1;
 			sem_post(arg->death_sem);
 			sem_post(arg->globs->is_finished_sem);
+			usleep(100);
+			sem_post(arg->globs->output_sem);
 			break ;
 		}
 		sem_post(arg->death_sem);
@@ -41,8 +44,8 @@ static void	*check_end_routine(void *void_arg)
 
 	arg = (t_process_arg *)void_arg;
 	sem_wait(arg->globs->is_finished_sem);
-	sem_post(arg->globs->is_finished_sem);
 	arg->is_finished = 1;
+	sem_post(arg->globs->is_finished_sem);
 	return (NULL);
 }
 
@@ -64,6 +67,7 @@ int			philo_process(t_process_arg *arg)
 	sem_close(arg->globs->forks_sem);
 	sem_close(arg->globs->is_finished_sem);
 	sem_close(arg->globs->nb_done_sem);
+	sem_close(arg->globs->output_sem);
 	close_death_sem(arg);
 	return (0);
 }
